@@ -8,6 +8,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
 import java.nio.ByteOrder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by heshangqiu on 2017/3/30 16:08
@@ -53,15 +55,19 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
             System.out.print("----------here1--------");
             System.out.println(" ");
             byteBuf.getBytes(byteBuf.readerIndex(), array); //将缓冲区中的数据拷贝到这个数组中
+            byteBuf.discardReadBytes();
+
 //            handleArray(array, 0, length); //下一步处理
 //            System.out.println("flagOne---->");
             //4 - 7 字节的二进制表示·协议中低位在前，故反向拼接
-            String bitStr = NumberUtil.binaryString(array[7])+NumberUtil.binaryString(array[6])+NumberUtil.binaryString(array[5])
+            String bitStr = NumberUtil.binaryString(array[7])
+                    +NumberUtil.binaryString(array[6])
+                    +NumberUtil.binaryString(array[5])
                     +NumberUtil.binaryString(array[4]);
 
             int realLength = Integer.valueOf(bitStr,2);
             System.out.println("realLength---->"+realLength);
-            OutUtil.Out();
+//            OutUtil.Out();
             for(int i = 0;i<array.length;i++){
                 System.out.println("array"+i+"--->"+array[i]);
             }
@@ -75,15 +81,17 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
     public void obtainImageData(byte[] array){
 
         //4 - 7 字节的二进制表示·协议中低位在前，故反向拼接
-        String bitStr = NumberUtil.binaryString(array[7])+NumberUtil.binaryString(array[6])+NumberUtil.binaryString(array[5])
+        String bitStr = NumberUtil.binaryString(array[7])
+                +NumberUtil.binaryString(array[6])
+                +NumberUtil.binaryString(array[5])
                 +NumberUtil.binaryString(array[4]);
 
         int realLength = Integer.valueOf(bitStr,2);
         //人脸数据长度
         int faceLength = realLength - 64;
         byte[] faceArray = new byte[array.length - 76];
-        System.arraycopy(array,77,faceArray,0,faceLength-1);
-        OutUtil.Out();
+        System.arraycopy(array,76,faceArray,0,faceLength-1);
+//        OutUtil.Out();
         for(int i = 0;i<faceArray.length-1;i++){
             System.out.println("faceArray"+i+"--->"+faceArray[i]);
         }
@@ -94,7 +102,10 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
 //            index++;
 //            System.out.println("convertflagToo"+i+"--->"+array[i]);
 //        }
-        FileUtil.byte2image(faceArray,"/Users/lizengqi/Pictures/myFace.jpeg");
+//        String filePath = FileUtil.buildFilePath();
+        Date date = new Date();
+        FileUtil.byte2image(faceArray,"/Users/lizengqi/Pictures/face_dev/"
+                +new SimpleDateFormat("yyyyMMddHHmmssSSS").format(date)+".jpeg");
         System.out.print("----------here2--------");
     }
 

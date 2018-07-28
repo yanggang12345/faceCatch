@@ -3,6 +3,8 @@ package com.nala.faceCatch.util;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.FileImageOutputStream;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * 文件读取工具类
@@ -138,7 +140,19 @@ public class FileUtil {
 
         return bytes;
     }
-
+    /**
+     * 构建保存路径
+     */
+    public static String buildFilePath(){
+        Date date = new Date();
+        String path="/Users/lizengqi/Pictures/"+new SimpleDateFormat("yyyy-MM-dd-hh-mm").format(date)+".jpeg";
+        //如果不存在,创建文件夹
+        File f = new File(path);
+        if(!f.exists()){
+            f.mkdirs();
+        }
+        return path;
+    }
 
 
 }
