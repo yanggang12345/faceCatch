@@ -2,6 +2,7 @@ package com.nala.faceCatch.util.netty;
 
 import com.nala.faceCatch.util.FileUtil;
 import com.nala.faceCatch.util.NumberUtil;
+import com.nala.faceCatch.util.OutUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
@@ -60,15 +61,15 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
 
             int realLength = Integer.valueOf(bitStr,2);
             System.out.println("realLength---->"+realLength);
-
+            OutUtil.Out();
             for(int i = 0;i<array.length;i++){
-                System.out.println("receiveflagToo"+i+"--->"+array[i]);
+                System.out.println("array"+i+"--->"+array[i]);
             }
-            while(realLength <= array.length)
+            System.out.println("array size:"+array.length);
+            if(realLength+12 == array.length){
                 obtainImageData(array);
+            }
         }
-
-//        obtainImageData(array);
         return null;
     }
     public void obtainImageData(byte[] array){
@@ -81,12 +82,18 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
         //人脸数据长度
         int faceLength = realLength - 64;
         byte[] faceArray = new byte[array.length - 76];
-        int index = 0;
-        for(int i = 77;i< faceArray.length;i++){
-            faceArray[index] = array[i];
-            index++;
-            System.out.println("convertflagToo"+i+"--->"+array[i]);
+        System.arraycopy(array,77,faceArray,0,faceLength-1);
+        OutUtil.Out();
+        for(int i = 0;i<faceArray.length-1;i++){
+            System.out.println("faceArray"+i+"--->"+faceArray[i]);
         }
+        System.out.println("faceArray size:"+faceLength);
+//        int index = 0;
+//        for(int i = 77;i< faceArray.length;i++){
+//            faceArray[index] = array[i];
+//            index++;
+//            System.out.println("convertflagToo"+i+"--->"+array[i]);
+//        }
         FileUtil.byte2image(faceArray,"/Users/lizengqi/Pictures/myFace.jpeg");
         System.out.print("----------here2--------");
     }

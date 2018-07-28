@@ -20,7 +20,7 @@ public class NettyClient {
     public void connect(String host, int port) throws Exception {
 
         EventLoopGroup workerGroup = new NioEventLoopGroup();
-
+        EventLoopGroup boosGroup = new NioEventLoopGroup(1);
         try {
 
 
@@ -28,6 +28,7 @@ public class NettyClient {
             bootstrap.group(workerGroup);
             bootstrap.channel(NioSocketChannel.class);
             bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
+
             bootstrap.handler(new NettyClientInitializer());
 
             // Start the client.
