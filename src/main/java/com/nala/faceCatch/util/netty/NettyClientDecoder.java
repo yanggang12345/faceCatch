@@ -43,11 +43,8 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
         byte[] array = new byte[length];    //分配一个具有length大小的数组
 
         if (byteBuf.hasArray()){//检查是否有支持数组
-//            System.out.print("----------here1--------");
             array = byteBuf.array();     //得到支持数组
             int offset = byteBuf.arrayOffset() + byteBuf.readerIndex();//计算第一个字节的偏移量
-
-//            handleArray(array, offset, length); //调用你的方法来处理这个array
             for(int i = 0;i<array.length;i++){
                 System.out.println("flagOne---->"+i+array[i]);
             }
@@ -55,9 +52,8 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
             System.out.print("----------here1--------");
             System.out.println(" ");
             byteBuf.getBytes(byteBuf.readerIndex(), array); //将缓冲区中的数据拷贝到这个数组中
-            byteBuf.discardReadBytes();
+            byteBuf.clear();
 
-//            handleArray(array, 0, length); //下一步处理
 //            System.out.println("flagOne---->");
             //4 - 7 字节的二进制表示·协议中低位在前，故反向拼接
             String bitStr = NumberUtil.binaryString(array[7])
@@ -96,12 +92,7 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
             System.out.println("faceArray"+i+"--->"+faceArray[i]);
         }
         System.out.println("faceArray size:"+faceLength);
-//        int index = 0;
-//        for(int i = 77;i< faceArray.length;i++){
-//            faceArray[index] = array[i];
-//            index++;
-//            System.out.println("convertflagToo"+i+"--->"+array[i]);
-//        }
+
 //        String filePath = FileUtil.buildFilePath();
         Date date = new Date();
         FileUtil.byte2image(faceArray,"/Users/lizengqi/Pictures/face_dev/"
