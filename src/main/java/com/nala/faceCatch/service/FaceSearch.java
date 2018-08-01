@@ -6,36 +6,26 @@ package com.nala.faceCatch.service;
  * description 人脸搜索
  */
 
-
-
 import com.nala.faceCatch.util.*;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 /**
  * 人脸搜索
  */
+@Service
 public class FaceSearch {
 
-    /**
-     * 重要提示代码中所需工具类
-     * FileUtil,Base64Util,HttpUtil,GsonUtils请从
-     * https://ai.baidu.com/file/658A35ABAB2D404FBF903F64D47C1F72
-     * https://ai.baidu.com/file/C8D81F3301E24D2892968F09AE1AD6E2
-     * https://ai.baidu.com/file/544D677F5D4E4F17B4122FBD60DB82B3
-     * https://ai.baidu.com/file/470B3ACCA3FE43788B5A963BF0B625F3
-     * 下载
-     */
-    public static String search() {
+    public static String search(byte[] image,String groupId) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/search";
         try {
-            byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/face_dev/20180730111449826.jpeg");
-            String image = ImageUtil.encode(bytes);
+            String baseImage = ImageUtil.encode(image);
             Map<String, Object> map = new HashMap<>();
-            map.put("image", image);
-            map.put("liveness_control", "NORMAL");
-            map.put("group_id_list", "group_repeat");
+            map.put("image", baseImage);
+            map.put("liveness_control", "LOW");
+            map.put("group_id_list", groupId);
             map.put("image_type", "BASE64");
             map.put("quality_control", "LOW");
 
@@ -54,7 +44,9 @@ public class FaceSearch {
         return null;
     }
 
-    public static void main(String[] args) {
-        FaceSearch.search();
+    public static void main(String[] args) throws Exception{
+        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/mayun_0.jpg");
+
+//        FaceSearch.search(bytes,"group_celebrity");
     }
 }

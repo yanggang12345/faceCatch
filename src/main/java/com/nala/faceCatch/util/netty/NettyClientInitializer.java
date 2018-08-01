@@ -30,6 +30,7 @@ public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("nettyClientDecoder", new NettyClientDecoder());
         ch.pipeline().addLast("framedecoder",new LengthFieldBasedFrameDecoder(1024*1024*1024, 0, 4,0,4));
 //        pipeline.addLast("stringDecoder", new StringDecoder(CharsetUtil.UTF_8));
+        ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(65535, 0, 2, 0, 2));
         pipeline.addLast("nettyMsgEncode", new NettyMsgEncoder());
 //        pipeline.addLast(new DelimiterBasedFrameDecoder(65535,delimiter));
         pipeline.addLast("framer", new DelimiterBasedFrameDecoder(1024*100, Delimiters.lineDelimiter()));
