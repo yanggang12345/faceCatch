@@ -10,7 +10,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ClientHandler extends SimpleChannelInboundHandler<Object> {
+public class ClientHandler extends SimpleChannelInboundHandler<String> {
     private static Logger logger = LoggerFactory
             .getLogger(ClientHandler.class);
 
@@ -24,8 +24,8 @@ public class ClientHandler extends SimpleChannelInboundHandler<Object> {
     }
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("接收的数据："+(String)msg);
+    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        System.out.println("接收的数据::"+(String)msg);
 
     }
 

@@ -49,7 +49,7 @@ public class NettyMsgDecoder extends LengthFieldBasedFrameDecoder {
         buf.readBytes(req);
 
         String jsonStr = new String(req, "UTF-8");
-
+        System.out.println("jsonStr--->"+jsonStr);
 
         byteBuf.discardReadBytes();
         return null;
