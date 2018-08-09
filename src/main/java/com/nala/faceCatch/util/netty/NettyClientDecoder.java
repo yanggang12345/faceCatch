@@ -32,74 +32,33 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
      * @param initialBytesToStrip 开始计算长度需要跳过的字节数
      * @param failFast
      */
-    public NettyClientDecoder(ByteOrder byteOrder, int maxFrameLength, int lengthFieldOffset, int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip, boolean failFast) {
-        super(byteOrder, maxFrameLength, lengthFieldOffset, lengthFieldLength, lengthAdjustment, initialBytesToStrip, failFast);
+    public NettyClientDecoder(ByteOrder byteOrder,int maxFrameLength, int lengthFieldOffset,
+                      int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip,
+                      boolean failFast) {
+        super(maxFrameLength, lengthFieldOffset, lengthFieldLength,
+                lengthAdjustment, initialBytesToStrip, failFast);
     }
 
     public NettyClientDecoder() {
-        this(ByteOrder.LITTLE_ENDIAN, Integer.MAX_VALUE, 0, 4, 0, 4, true);
+        this(ByteOrder.LITTLE_ENDIAN, 1000000000, 4, 4, 4, 76, true);
     }
-
-    private static int index = 0;
 
     /**
      * 根据构造方法自动处理粘包,半包.然后调用此decode
      */
     @Override
     protected Object decode(ChannelHandlerContext ctx, ByteBuf byteBuf) throws Exception {
-        int length = byteBuf.readableBytes();//计算可读字节数
-        byte[] array = new byte[length];    //分配一个具有length大小的数组
 
-        if (byteBuf.hasArray()){//检查是否有支持数组
-            array = byteBuf.array();     //得到支持数组
-            int offset = byteBuf.arrayOffset() + byteBuf.readerIndex();//计算第一个字节的偏移量
-            for(int i = 0;i<array.length;i++){
-                System.out.println("flagOne---->"+i+array[i]);
-            }
+        int buflen = byteBuf.readableBytes();
+        byte[] bufArray = new byte[buflen];
+        byteBuf.readBytes(bufArray);
 
-        }else if (!byteBuf.hasArray()) {//false表示为这是直接缓冲
-            System.out.print("----------here1--------");
-            System.out.println(" ");
+        super.decode(ctx,byteBuf);
 
-            byteBuf.getBytes(byteBuf.readerIndex(), array); //将缓冲区中的数据拷贝到这个数组中
-            OutUtil.Out();
-            for(int i = 0;i<array.length;i++){
-                    System.out.println("array"+i+"--->"+array[i]);
-                }
-            System.out.println("childArray size:"+array.length);
+        int len =byteBuf.readableBytes();
+        byte[] array = new byte[len];
+        byteBuf.readBytes(array);
 
-            if(index == byteBuf.writerIndex()){
-                throw new RuntimeException("没有更多数据包！");
-            }
-
-            //4 - 7 字节的二进制表示·协议中低位在前，故反向拼接
-            String bitStr = NumberUtil.binaryString(array[index+7])
-                            +NumberUtil.binaryString(array[index+6])
-                            +NumberUtil.binaryString(array[index+5])
-                            +NumberUtil.binaryString(array[index+4]);
-            //数据包长度
-            int realLength = Integer.valueOf(bitStr,2);
-
-            //人脸数据长度
-            int faceLength = realLength - 64;
-            byte[] faceArray = new byte[faceLength];
-            System.arraycopy(array,index+76,faceArray,0,faceLength-1);
-
-            if(realLength+12 == array.length-index){
-                faceMacth(faceArray);
-            }
-        }
-        if(byteBuf.writerIndex()-index > 10000)
-        index = byteBuf.writerIndex();
-        return null;
+        return byteBuf;
     }
-    public void faceMacth(byte[] faceArray){
-        //人脸库·搜索 匹配
-        FaceSearch.search(faceArray,"group_repeat,group_celebrity");
-        Date date = new Date();
-        FileUtil.byte2image(faceArray,"/Users/lizengqi/Pictures/face_dev/"
-                +new SimpleDateFormat("yyyyMMddHHmmssSSS").format(date)+".jpeg");
-        System.out.print("----------here2--------");
-    }
-
 }

@@ -25,7 +25,7 @@ public class NettyMsgDecoder extends LengthFieldBasedFrameDecoder {
     }
 
     public NettyMsgDecoder() {
-        this(ByteOrder.BIG_ENDIAN, 1000000, 0, 4, 0, 4, true);
+        this(ByteOrder.BIG_ENDIAN, 1000000, 4, 4, 64, 4, true);
     }
 
     /**
