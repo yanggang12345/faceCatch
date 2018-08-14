@@ -144,12 +144,13 @@ public class JsonUtil {
 
     /**
      * 反序列化泛型的对象如Result<List<User>>, JsonUtil.fromJson(param, new TypeReference<DadaResult<List<DadaCityRepVO>>>(){})
+     *
      * @param jsonString
      * @param valueTypeRef
      * @param <T>
      * @return
      */
-    public static <T> T fromJson(String jsonString, TypeReference valueTypeRef){
+    public static <T> T fromJson(String jsonString, TypeReference valueTypeRef) {
         if (StringUtils.isEmpty(jsonString)) {
             return null;
         }
@@ -205,7 +206,6 @@ public class JsonUtil {
         mapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         mapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
     }
-
 
 
     /**
@@ -267,7 +267,6 @@ public class JsonUtil {
     public static <T> List<T> toList(String json, Class<T> clazz) {
         return JsonUtil.fromJson(json, List.class, clazz);
     }
-
 
 
 }

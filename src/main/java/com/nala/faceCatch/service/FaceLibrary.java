@@ -19,9 +19,10 @@ public class FaceLibrary {
 
     /**
      * 新增人脸（人脸注册）
+     *
      * @return
      */
-    public static String add(byte[] image,String groupId,String userId,String userInfo) {
+    public static String add(byte[] image, String groupId, String userId, String userInfo) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/add";
         try {
@@ -49,10 +50,11 @@ public class FaceLibrary {
 
     /**
      * 人脸库·更新人脸
+     *
      * @param image
      * @return
      */
-    public static String update(byte[] image,String groupId,String userId,String userInfo) {
+    public static String update(byte[] image, String groupId, String userId, String userInfo) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/update";
         try {
@@ -79,9 +81,10 @@ public class FaceLibrary {
 
     /**
      * 用户信息查询·获取人脸库中某个用户的信息（user_info和所属组）
+     *
      * @return
      */
-    public static String get(String userId,String groupId) {
+    public static String get(String userId, String groupId) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/faceset/user/get";
         try {
@@ -102,9 +105,10 @@ public class FaceLibrary {
 
     /**
      * 获取用户人脸列表
+     *
      * @return
      */
-    public static String getList(String userId,String groupId) {
+    public static String getList(String userId, String groupId) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/faceset/face/getlist";
         try {
@@ -125,6 +129,7 @@ public class FaceLibrary {
 
     /**
      * 获取用户列表
+     *
      * @return
      */
     public static String getUsers(String groupId) {
@@ -147,6 +152,7 @@ public class FaceLibrary {
 
     /**
      * 创建用户组
+     *
      * @return
      */
     public static String groupAdd(String groupId) {
@@ -168,6 +174,7 @@ public class FaceLibrary {
 
     /**
      * 删除用户组
+     *
      * @return
      */
     public static String groupDelete(String groupId) {
@@ -190,9 +197,10 @@ public class FaceLibrary {
 
     /**
      * 用户组列表查询
+     *
      * @return
      */
-    public static String GroupGetlist(int startIndex,int groupLength) {
+    public static String GroupGetlist(int startIndex, int groupLength) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/faceset/group/getlist";
         try {
@@ -211,8 +219,7 @@ public class FaceLibrary {
     }
 
 
-
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 //        FaceLibrary.add();
 //        GroupGetlist();
 

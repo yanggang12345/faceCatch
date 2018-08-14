@@ -15,10 +15,10 @@ import java.util.*;
 public class Contrast {
 
 
-    public static Map<String,Object> match() {
+    public static Map<String, Object> match() {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/match";
-        Map<String,Object> resultMap = new HashMap<>();
+        Map<String, Object> resultMap = new HashMap<>();
         try {
 
             byte[] bytes1 = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/2.jpg");
@@ -52,17 +52,17 @@ public class Contrast {
             String accessToken = GetToken.getAuth();
 
             String result = HttpUtil.post(url, accessToken, "application/json", param);
-            System.out.println("result---"+result);
-            JSONObject jsonObjectResult= new JSONObject(result);
-            System.out.println("jsonObjectResult---"+jsonObjectResult);
+            System.out.println("result---" + result);
+            JSONObject jsonObjectResult = new JSONObject(result);
+            System.out.println("jsonObjectResult---" + jsonObjectResult);
 
             JSONObject resultROI = jsonObjectResult.getJSONObject("result");
-            if(resultROI != null){
+            if (resultROI != null) {
                 resultMap = Read.analysisJson(resultROI);
-            }else {
+            } else {
                 return null;
             }
-            System.out.println("resultROI---"+resultROI);
+            System.out.println("resultROI---" + resultROI);
 
             System.out.println(resultMap);
 

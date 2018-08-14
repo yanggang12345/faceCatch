@@ -17,10 +17,10 @@ public class VfileServer {
 
     public static int port = 8102;
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
         //创建客户端的Socket服务，指定目的主机和端口。
-        Socket s = new Socket("192.168.10.10",8102);
+        Socket s = new Socket("192.168.10.10", 8102);
         System.out.println("客户端已建立链接...");
 
 //        //发送数据，应该获取Socket流中的输出流。
@@ -32,17 +32,18 @@ public class VfileServer {
         //注意：read会产生阻塞
         int len = in.read(buf);
         //将服务器发过来的额数据打印在控制台上
-        System.out.println(new String(buf,0,len));
+        System.out.println(new String(buf, 0, len));
         //关闭资源
         s.close();
 
     }
 
     /**
-     *读取输入流中指定字节的长度
+     * 读取输入流中指定字节的长度
+     *
      * @param in     输入流
      * @param length 指定长度
-     * @return       指定长度的字节数组
+     * @return 指定长度的字节数组
      */
     public static byte[] readBytes(InputStream in, long length) throws IOException {
         ByteArrayOutputStream bo = new ByteArrayOutputStream();// 建立字节流

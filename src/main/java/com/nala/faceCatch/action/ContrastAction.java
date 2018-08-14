@@ -15,7 +15,6 @@ import java.util.Map;
  */
 
 
-
 @Controller
 @RequestMapping(value = "/contrast")
 
@@ -26,9 +25,9 @@ public class ContrastAction {
 
     @ResponseBody
     @RequestMapping(value = "/gain/analysis/result")
-    public Map<String,Object> getContrastResult(){
+    public Map<String, Object> getContrastResult() {
 
-        Map<String,Object> map = contrast.match();
+        Map<String, Object> map = contrast.match();
 
         return map;
     }

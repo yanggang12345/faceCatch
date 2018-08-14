@@ -17,7 +17,7 @@ import java.util.*;
 @Service
 public class FaceSearch {
 
-    public static String search(byte[] image,String groupId) {
+    public static String search(byte[] image, String groupId) {
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/search";
         try {
@@ -44,7 +44,7 @@ public class FaceSearch {
         return null;
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/mayun_0.jpg");
 
 //        FaceSearch.search(bytes,"group_celebrity");

@@ -5,8 +5,8 @@ package com.nala.faceCatch.entity;
  * create date 2018/7/24
  * description
  */
-public enum  MsgType {
+public enum MsgType {
 
-    PING,ASK,REPLY,LOGIN
+    PING, ASK, REPLY, LOGIN
 }
 

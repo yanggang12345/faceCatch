@@ -4,61 +4,59 @@ package com.nala.faceCatch.service;
  * Created by heshangqiu on 2016/12/28 9:56
  */
 
-import com.nala.faceCatch.util.netty.ClientHandler;
+import com.nala.faceCatch.util.netty.idle.ClientHandler;
 import com.nala.faceCatch.util.netty.NettyClientInitializer;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
-import java.util.concurrent.TimeUnit;
-
 public class NettyClient {
 
-//    NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
-    private  NioEventLoopGroup workGroup = new NioEventLoopGroup(4);
+    public void connect(String host, int port) throws Exception {
 
-    private   Channel channel;
+        // 创建EventLoopGroup，提供用于处理Channel事件的EventLoop
+        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup boosGroup = new NioEventLoopGroup(1);
+        try {
 
-    private   Bootstrap bootstrap;
 
-    public void initClient(){
-        bootstrap = new Bootstrap();
-        bootstrap.group(workGroup);
-        bootstrap.channel(NioSocketChannel.class);
-        bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
-        bootstrap.handler(new NettyClientInitializer());
-        connect("192.168.10.10", 8102);
+            Bootstrap bootstrap = new Bootstrap();
+            bootstrap.group(workerGroup);
+            bootstrap.channel(NioSocketChannel.class);
+            bootstrap.option(ChannelOption.SO_KEEPALIVE, true);
+//            bootstrap.handler(new HeartBeatsClientInitializer());
+            // 设置用于处理Channel数据和事件的ChannelInboundHandler
+            bootstrap.handler(new NettyClientInitializer());
+            // Start the client.
+            ChannelFuture f = bootstrap.connect(host, port).sync();
+            Channel c = f.channel();
+            ClientHandler clientHandler = c.pipeline().get(ClientHandler.class);
+
+//            clientHandler.sendRequest();
+            // Wait until the connection is closed.
+            f.channel().closeFuture().sync();
+
+        } finally {
+            workerGroup.shutdownGracefully();
+            System.out.println("客户端释放了资源>>>>>>>>>>>>>>>>>");
+        }
+
     }
 
-    public void connect(String host, int port){
+    private void reConnetServer() {
 
-        if(channel != null && channel.isActive()){return;}
-            ChannelFuture future = bootstrap.connect(host, port);
-            channel = future.channel();
-            future.addListener(new ChannelFutureListener() {
-                @Override
-                public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                    if(channelFuture.isSuccess()){
-                        channel = channelFuture.channel();
-                        System.out.println("Connect to server successfully!");
-                    }else {
-                        System.out.println("Failed to connect to server, try connect after 10s");
-                        channelFuture.channel().eventLoop().schedule(new Runnable() {
-                            @Override
-                            public void run() {
-                                connect("192.168.10.10",8102);
-                            }
-                        },5, TimeUnit.SECONDS);
-                    }
-                }
-            });
     }
 
     public static void main(String[] args) throws Exception {
         NettyClient client = new NettyClient();
-        client.initClient();
+//        client.connect("www.syhpgkj.com", 8070);
+        client.connect("192.168.10.10", 8102);
+//        Thread.sleep(100000);
     }
 }
 

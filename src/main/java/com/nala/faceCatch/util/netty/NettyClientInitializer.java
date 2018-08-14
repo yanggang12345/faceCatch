@@ -1,5 +1,6 @@
 package com.nala.faceCatch.util.netty;
 
+import com.nala.faceCatch.util.netty.idle.ClientHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.FixedRecvByteBufAllocator;
@@ -17,6 +18,8 @@ import java.util.concurrent.TimeUnit;
 
 public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
 
+    private static final int READ_IDEL_TIME_OUT = 5;//读超时
+
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
         ChannelPipeline pipeline = ch.pipeline();
@@ -26,11 +29,12 @@ public class NettyClientInitializer extends ChannelInitializer<SocketChannel> {
 
         pipeline.addLast(new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, 900000000, 4, 4, 4, 76, true));
 //        pipeline.addLast("stringDecoder", new StringDecoder(CharsetUtil.UTF_8));
-//        pipeline.addLast(new NettyMsgEncoder());
-
-        //设定IdleStateHandler心跳检测，5秒进行一次读检测
-        pipeline.addLast(new IdleStateHandler(5,0,0, TimeUnit.SECONDS));
         pipeline.addLast(new ClientHandler());
+//        pipeline.addLast(new ClientHeartBeatsHandler());
+
+        pipeline.addLast(new IdleStateHandler(READ_IDEL_TIME_OUT, 0, 0, TimeUnit.SECONDS));
+//        pipeline.addLast(new ClientHeartBeatsHandler());
+
 
     }
 

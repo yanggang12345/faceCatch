@@ -18,23 +18,23 @@ public class FileUtil {
         File file = new File(filePath);
         if (!file.exists()) {
             throw new FileNotFoundException(filePath);
-        } 
+        }
 
         if (file.length() > 1024 * 1024 * 1024) {
             throw new IOException("File is too large");
-        } 
+        }
 
         StringBuilder sb = new StringBuilder((int) (file.length()));
         // 创建字节输入流  
-        FileInputStream fis = new FileInputStream(filePath);  
+        FileInputStream fis = new FileInputStream(filePath);
         // 创建一个长度为10240的Buffer
-        byte[] bbuf = new byte[10240];  
+        byte[] bbuf = new byte[10240];
         // 用于保存实际读取的字节数  
-        int hasRead = 0;  
-        while ( (hasRead = fis.read(bbuf)) > 0 ) {  
-            sb.append(new String(bbuf, 0, hasRead));  
-        }  
-        fis.close();  
+        int hasRead = 0;
+        while ((hasRead = fis.read(bbuf)) > 0) {
+            sb.append(new String(bbuf, 0, hasRead));
+        }
+        fis.close();
         return sb.toString();
     }
 
@@ -77,10 +77,11 @@ public class FileUtil {
 
     /**
      * image to byte data
+     *
      * @param path
      * @return
      */
-    public static byte[] image2byte(String path){
+    public static byte[] image2byte(String path) {
         byte[] data = null;
         FileImageInputStream input = null;
         try {
@@ -94,11 +95,9 @@ public class FileUtil {
             data = output.toByteArray();
             output.close();
             input.close();
-        }
-        catch (FileNotFoundException ex1) {
+        } catch (FileNotFoundException ex1) {
             ex1.printStackTrace();
-        }
-        catch (IOException ex1) {
+        } catch (IOException ex1) {
             ex1.printStackTrace();
         }
         return data;
@@ -106,16 +105,17 @@ public class FileUtil {
 
     /**
      * byte数组到图片
+     *
      * @param data
      * @param path
      */
-    public static void byte2image(byte[] data,String path){
-        if(data.length<3||path.equals("")) return;
-        try{
+    public static void byte2image(byte[] data, String path) {
+        if (data.length < 3 || path.equals("")) return;
+        try {
             FileImageOutputStream imageOutput = new FileImageOutputStream(new File(path));
             imageOutput.write(data, 0, data.length);
             imageOutput.close();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             System.out.println("Exception: " + ex);
             ex.printStackTrace();
         }
@@ -128,27 +128,28 @@ public class FileUtil {
      * @return
      */
     public static byte[] toBytes(String str) {
-        if(str == null || str.trim().equals("")) {
+        if (str == null || str.trim().equals("")) {
             return new byte[0];
         }
 
         byte[] bytes = new byte[str.length() / 2];
-        for(int i = 0; i < str.length() / 2; i++) {
+        for (int i = 0; i < str.length() / 2; i++) {
             String subStr = str.substring(i * 2, i * 2 + 2);
             bytes[i] = (byte) Integer.parseInt(subStr, 16);
         }
 
         return bytes;
     }
+
     /**
      * 构建保存路径
      */
-    public static String buildFilePath(){
+    public static String buildFilePath() {
         Date date = new Date();
-        String path="/Users/lizengqi/Pictures/"+new SimpleDateFormat("yyyy-MM-dd-hh-mm").format(date)+".jpeg";
+        String path = "/Users/lizengqi/Pictures/" + new SimpleDateFormat("yyyy-MM-dd-hh-mm").format(date) + ".jpeg";
         //如果不存在,创建文件夹
         File f = new File(path);
-        if(!f.exists()){
+        if (!f.exists()) {
             f.mkdirs();
         }
         return path;

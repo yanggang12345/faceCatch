@@ -32,9 +32,9 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
      * @param initialBytesToStrip 开始计算长度需要跳过的字节数
      * @param failFast
      */
-    public NettyClientDecoder(ByteOrder byteOrder,int maxFrameLength, int lengthFieldOffset,
-                      int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip,
-                      boolean failFast) {
+    public NettyClientDecoder(ByteOrder byteOrder, int maxFrameLength, int lengthFieldOffset,
+                              int lengthFieldLength, int lengthAdjustment, int initialBytesToStrip,
+                              boolean failFast) {
         super(maxFrameLength, lengthFieldOffset, lengthFieldLength,
                 lengthAdjustment, initialBytesToStrip, failFast);
     }
@@ -49,15 +49,15 @@ public class NettyClientDecoder extends LengthFieldBasedFrameDecoder {
     @Override
     protected Object decode(ChannelHandlerContext ctx, ByteBuf byteBuf) throws Exception {
 
-        int buflen = byteBuf.readableBytes();
-        byte[] bufArray = new byte[buflen];
-        byteBuf.readBytes(bufArray);
-
-        super.decode(ctx,byteBuf);
-
-        int len =byteBuf.readableBytes();
-        byte[] array = new byte[len];
-        byteBuf.readBytes(array);
+//        int buflen = byteBuf.readableBytes();
+//        byte[] bufArray = new byte[buflen];
+//        byteBuf.readBytes(bufArray);
+//
+//        super.decode(ctx,byteBuf);
+//
+//        int len =byteBuf.readableBytes();
+//        byte[] array = new byte[len];
+//        byteBuf.readBytes(array);
 
         return byteBuf;
     }
