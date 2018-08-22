@@ -44,9 +44,8 @@ public class HeartBeatClientHandler extends ChannelInboundHandlerAdapter {
             byte[] array = new byte[byteBuf.readableBytes()];
             byteBuf.readBytes(array);
             System.out.println("心跳检测正常！！");
+        }else {
+            ctx.fireChannelRead(msg);
         }
-        System.out.println("HeartBeatClientHandler-read0-msg");
-        byte[] array = new byte[byteBuf.readableBytes()];
-        byteBuf.readBytes(array);
     }
 }

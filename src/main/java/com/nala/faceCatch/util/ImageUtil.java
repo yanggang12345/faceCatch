@@ -1,7 +1,7 @@
 package com.nala.faceCatch.util;
 
 
-import com.nala.faceCatch.service.FaceSearch;
+import com.nala.faceCatch.service.face.FaceSearch;
 import org.apache.commons.codec.binary.Base64;
 
 import java.text.SimpleDateFormat;

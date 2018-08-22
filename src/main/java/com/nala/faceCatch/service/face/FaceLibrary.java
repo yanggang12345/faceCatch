@@ -1,4 +1,4 @@
-package com.nala.faceCatch.service;
+package com.nala.faceCatch.service.face;
 
 /**
  * create by lizenn
@@ -8,7 +8,6 @@ package com.nala.faceCatch.service;
 
 import com.nala.faceCatch.util.*;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 
 
@@ -81,7 +80,6 @@ public class FaceLibrary {
 
     /**
      * 用户信息查询·获取人脸库中某个用户的信息（user_info和所属组）
-     *
      * @return
      */
     public static String get(String userId, String groupId) {
@@ -105,7 +103,6 @@ public class FaceLibrary {
 
     /**
      * 获取用户人脸列表
-     *
      * @return
      */
     public static String getList(String userId, String groupId) {
@@ -129,7 +126,6 @@ public class FaceLibrary {
 
     /**
      * 获取用户列表
-     *
      * @return
      */
     public static String getUsers(String groupId) {
@@ -152,7 +148,6 @@ public class FaceLibrary {
 
     /**
      * 创建用户组
-     *
      * @return
      */
     public static String groupAdd(String groupId) {
@@ -174,7 +169,6 @@ public class FaceLibrary {
 
     /**
      * 删除用户组
-     *
      * @return
      */
     public static String groupDelete(String groupId) {
@@ -197,7 +191,6 @@ public class FaceLibrary {
 
     /**
      * 用户组列表查询
-     *
      * @return
      */
     public static String GroupGetlist(int startIndex, int groupLength) {

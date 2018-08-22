@@ -1,4 +1,4 @@
-package com.nala.faceCatch.service;
+package com.nala.faceCatch.service.face;
 
 import com.nala.faceCatch.util.*;
 import com.baidu.aip.util.Base64Util;

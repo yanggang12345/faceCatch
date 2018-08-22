@@ -1,5 +1,6 @@
 package com.nala.faceCatch.util.netty.idle;
 
+import com.nala.faceCatch.util.netty.NettyClientDecoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -42,10 +43,10 @@ public class HeartBeatsClient {
                         new IdleStateHandler(10, 0, 0, TimeUnit.SECONDS),
                         //心跳状态handler
                         idleStateTrigger,
+//                        new HeartBeatsOutboundHandler(),
                         //心跳检测数据处理handler
                         new HeartBeatClientHandler(),
 //                            new StringDecoder(CharsetUtil.UTF_8),
-                        new StringEncoder(),
                         new LengthFieldBasedFrameDecoder(ByteOrder.LITTLE_ENDIAN, 900000000,
                                 4, 4, 4, 76, true),
                         //数据包处理handler

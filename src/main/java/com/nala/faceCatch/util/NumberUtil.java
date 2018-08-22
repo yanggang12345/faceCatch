@@ -108,7 +108,7 @@ public class NumberUtil {
     }
 
 //    public static void main(String[] args) {
-//        String heartMsg = "A010bb551000b01a0000";
+//        String heartMsg = "A110bb551000b01a0000";
 //        byte[] array = toBytes(heartMsg);
 //        for (int i = 0; i < array.length ; i++) {
 //            System.out.println(array[i]);

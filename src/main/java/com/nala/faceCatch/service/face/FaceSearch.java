@@ -1,4 +1,4 @@
-package com.nala.faceCatch.service;
+package com.nala.faceCatch.service.face;
 
 /**
  * create by lizenn
@@ -46,7 +46,6 @@ public class FaceSearch {
 
     public static void main(String[] args) throws Exception {
         byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/mayun_0.jpg");
-
 //        FaceSearch.search(bytes,"group_celebrity");
     }
 }
