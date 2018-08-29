@@ -6,12 +6,15 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * create by lizenn
  * create date 2018/8/15
  * description 心跳检测处理器
  */
+@Component
 public class HeartBeartHandler extends ChannelInboundHandlerAdapter {
 
     /**
@@ -29,6 +32,9 @@ public class HeartBeartHandler extends ChannelInboundHandlerAdapter {
      */
     private static final int dataHead = -1592738987;
 
+    @Autowired
+    private Client client;
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("--- Server is active ---");
@@ -42,7 +48,7 @@ public class HeartBeartHandler extends ChannelInboundHandlerAdapter {
         // 10s 之后尝试重新连接服务器
         System.out.println("10s 之后尝试重新连接服务器...");
         Thread.sleep(10 * 1000);
-        new Client().initClient("192.168.10.10",8102);
+        client.initClient("192.168.10.10",8102);
     }
 
     @Override

@@ -6,6 +6,8 @@ package com.nala.faceCatch.service.face;
  * description 人脸搜索
  */
 
+import com.google.gson.Gson;
+import com.nala.faceCatch.entity.search.SearchRootResultVO;
 import com.nala.faceCatch.util.*;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,8 @@ import java.util.*;
 @Service
 public class FaceSearch {
 
-    public static String search(byte[] image, String groupId) {
+    public static SearchRootResultVO search(byte[] image, String groupId) {
+        SearchRootResultVO searchRootResultVO = new SearchRootResultVO();
         // 请求url
         String url = "https://aip.baidubce.com/rest/2.0/face/v3/search";
         try {
@@ -36,16 +39,21 @@ public class FaceSearch {
             String accessToken = GetToken.getAuth();
 
             String result = HttpUtil.post(url, accessToken, "application/json", param);
+
+            Gson gson = new Gson();
+            searchRootResultVO = gson.fromJson(result, SearchRootResultVO.class);
+
+            System.out.println("searchRootResultVO.getError_code()--->"+searchRootResultVO.getError_code());
             System.out.println(result);
-            return result;
+            return searchRootResultVO;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return searchRootResultVO;
     }
 
-    public static void main(String[] args) throws Exception {
-        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/mayun_0.jpg");
-//        FaceSearch.search(bytes,"group_celebrity");
-    }
+//    public static void main(String[] args) throws Exception {
+//        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/mayun_0.jpg");
+////        FaceSearch.search(bytes,"group_celebrity");
+//    }
 }

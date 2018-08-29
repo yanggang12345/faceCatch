@@ -9,6 +9,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.Date;
  * create date 2018/8/15
  * description
  */
+
 public class DataHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     private static Logger logger = LoggerFactory

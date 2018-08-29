@@ -9,6 +9,8 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.nio.ByteOrder;
 import java.util.concurrent.TimeUnit;
@@ -18,11 +20,15 @@ import java.util.concurrent.TimeUnit;
  * create date 2018/8/15
  * description
  */
+
 public class Client {
 
     private static Channel ch;
 
     private static Bootstrap bootstrap;
+
+//    @Autowired
+//    private DataHandler dataHandler;
 
     public static void main(String[] args) throws Exception{
 
