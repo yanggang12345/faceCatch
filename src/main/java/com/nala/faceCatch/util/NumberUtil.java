@@ -50,22 +50,6 @@ public class NumberUtil {
 
     }
 
-//    public static void main(String[] args){
-////        convertBinary(441);
-//
-//        Integer.toBinaryString(441);
-//        Integer.toBinaryString(441);
-//
-//        //十进制转二进制
-//        System.out.println(Integer.toBinaryString(0));
-//        Integer.valueOf("110111001",2).toString();
-//        //二进制转十进制
-//        System.out.println(Integer.valueOf("110111001",2).toString());
-//        //16转10进制
-////        Integer.valueOf("bb",16).toString();
-////        System.out.println(Integer.valueOf("97",16).toString());
-//    }
-
     /**
      * 十进制转二进制，获取末尾8位二进制码
      *
@@ -106,13 +90,4 @@ public class NumberUtil {
 
         return bytes;
     }
-
-//    public static void main(String[] args) {
-//        String heartMsg = "A110bb551000b01a0000";
-//        byte[] array = toBytes(heartMsg);
-//        for (int i = 0; i < array.length ; i++) {
-//            System.out.println(array[i]);
-//
-//        }
-//    }
 }

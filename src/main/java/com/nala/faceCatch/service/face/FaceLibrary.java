@@ -47,6 +47,36 @@ public class FaceLibrary {
         return null;
     }
 
+
+    /**
+     * 人脸删除
+     * @param image
+     * @param groupId
+     * @param userId
+     * @param userInfo
+     * @return
+     */
+    public static String delete(String groupId, String userId, String faceToken) {
+        // 请求url
+        String url = "https://aip.baidubce.com/rest/2.0/face/v3/faceset/face/delete";
+        try {
+            Map<String, Object> map = new HashMap<>();
+            map.put("group_id", groupId);
+            map.put("user_id", userId);
+            map.put("face_token", faceToken);
+
+            String param = GsonUtils.toJson(map);
+
+
+            String result = HttpUtil.post(url, accessToken, "application/json", param);
+            System.out.println(result);
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * 人脸库·更新人脸
      *
@@ -213,9 +243,9 @@ public class FaceLibrary {
 
 
     public static void main(String[] args) throws Exception {
-//        FaceLibrary.add();
-//        GroupGetlist();
-
-        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/mayun_1.jpg");
+//        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/image_dev/mayun_1.jpg");
+//        add(bytes,"group_repeat","mayun","alibaba");
+//        getList("lizengqi","group_repeat");
+        delete("group_repeat","lizengqi","7aebf33fcfa818b40120418bc4aa4368");
     }
 }
