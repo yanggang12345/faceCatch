@@ -3,6 +3,8 @@ package com.nala.faceCatch.util;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.FileImageOutputStream;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -154,6 +156,35 @@ public class FileUtil {
         }
         return path;
     }
+
+    /**
+     * 获取网络文件流
+     * @param url
+     * @return
+     * @throws IOException
+     */
+    public static byte[] getFileToByte(String url) throws IOException{
+        URL urlConet = new URL(url);
+        HttpURLConnection con = (HttpURLConnection)urlConet.openConnection();
+        con.setRequestMethod("GET");
+        con.setConnectTimeout(4 * 1000);
+        InputStream inStream = con .getInputStream();    //通过输入流获取图片数据
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[2048];
+        int len = 0;
+        while( (len=inStream.read(buffer)) != -1 ){
+            outStream.write(buffer, 0, len);
+        }
+        inStream.close();
+        byte[] data =  outStream.toByteArray();
+        return data;
+    }
+
+//    public static void main(String[] args) throws Exception{
+//        byte[] fileToByte = getFileToByte("http://img.nala.com.cn/saas/test/face/13e7de42b0cd444a86471d4e974e80c6/15361179553301082.jpeg");
+//        System.out.println(fileToByte.toString());
+//        byte2image(fileToByte,"/Users/lizengqi/Pictures/a.jpeg");
+//    }
 
 
 }

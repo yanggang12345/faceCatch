@@ -1,9 +1,5 @@
 package com.nala.faceCatch.util;
-
-
-import com.nala.faceCatch.service.face.FaceSearch;
 import org.apache.commons.codec.binary.Base64;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -36,7 +32,10 @@ public class ImageUtil {
 
 
     public static void main(String[] args) throws Exception {
-        byte[] bytes1 = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/2.jpg");
+        byte[] bytes1 = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/image_dev/2.jpg");
+        String str = Base64.encodeBase64String(bytes1);
+        byte[] array = Base64.decodeBase64(str);
+        faceMacth(array);
         System.out.println(encode(bytes1));
     }
 
@@ -54,7 +53,7 @@ public class ImageUtil {
 //        byte[] faceArray = new byte[faceLength];
 //        System.arraycopy(array,76,faceArray,0,faceLength-1);
 //        //人脸库·搜索 匹配
-        FaceSearch.search(array, "group_repeat,group_celebrity");
+//        FaceSearch.search(array, "group_repeat,group_celebrity");
         Date date = new Date();
         FileUtil.byte2image(array, "/Users/lizengqi/Pictures/face_dev/"
                 + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(date) + ".jpeg");
