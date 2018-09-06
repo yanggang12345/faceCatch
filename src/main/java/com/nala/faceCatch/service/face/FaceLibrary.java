@@ -243,9 +243,11 @@ public class FaceLibrary {
 
 
     public static void main(String[] args) throws Exception {
-//        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/image_dev/mayun_1.jpg");
+        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/face_dev/20180904204727535.jpeg");
 //        add(bytes,"group_repeat","mayun","alibaba");
 //        getList("lizengqi","group_repeat");
-        delete("group_repeat","lizengqi","7aebf33fcfa818b40120418bc4aa4368");
+//        delete("group_repeat","lizengqi","7aebf33fcfa818b40120418bc4aa4368");
+        String result = add(bytes,"group_number1","lizenn1","lll");
+        System.out.println(result);
     }
 }
