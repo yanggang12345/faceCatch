@@ -48,7 +48,7 @@ public class HeartBeartHandler extends ChannelInboundHandlerAdapter {
         // 10s 之后尝试重新连接服务器
         System.out.println("10s 之后尝试重新连接服务器...");
         Thread.sleep(10 * 1000);
-        client.initClient("192.168.10.10",8102);
+        client.initClient("192.168.10.11",8102);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class HeartBeartHandler extends ChannelInboundHandlerAdapter {
         System.out.println("连接出现异常");
         System.out.println("10s 之后尝试重新连接服务器...");
         Thread.sleep(10 * 1000);
-        new Client().initClient("192.168.10.10",8102);
+        new Client().initClient("192.168.10.11",8102);
     }
 
     /**

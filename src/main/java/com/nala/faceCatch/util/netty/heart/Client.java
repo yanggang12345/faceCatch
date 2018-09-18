@@ -32,7 +32,7 @@ public class Client {
 
     public static void main(String[] args) throws Exception{
 
-        new Client().initClient("192.168.10.10",8102);
+        new Client().initClient("192.168.10.11",8102);
     }
 
 
