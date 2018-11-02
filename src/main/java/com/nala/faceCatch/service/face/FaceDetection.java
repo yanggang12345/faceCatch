@@ -6,7 +6,6 @@ package com.nala.faceCatch.service.face;
  * description 人脸检测
  */
 
-import com.google.gson.JsonObject;
 import com.nala.faceCatch.util.*;
 import java.util.*;
 
@@ -46,19 +45,22 @@ public class FaceDetection {
 
 
     public static void main(String[] args) {
-        byte[] image = FileUtil.image2byte("/Users/lizengqi/Pictures/image_dev/lizenn1.jpeg");
-        String result = FaceDetection.faceQuality(image);
-        try{
-            Map map = JsonUtil.json2map(result);
-            System.out.println(map);
-            Object result2 = map.get(result);
-            System.out.println("result--->"+result2);
+        byte[] image = FileUtil.image2byte("/Users/lizengqi/Pictures/face_dev/face_test/003.jpeg");
+//        String result = FaceDetection.faceQuality(image);
+//        try{
+//            Map map = JsonUtil.json2map(result);
+//            System.out.println(map);
+//            Object result2 = map.get(result);
+//            System.out.println("result--->"+result2);
+//
+//
+//
+//        }catch (Exception e){
+//            System.out.println(e);
+//        }
 
-
-
-        }catch (Exception e){
-            System.out.println(e);
-        }
+        String result = detect(image);
+        System.out.println(result);
     }
 
     /**

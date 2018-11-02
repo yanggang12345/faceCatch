@@ -53,8 +53,8 @@ public class FaceSearch {
     }
 
     public static void main(String[] args) throws Exception {
-        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/face_dev/20180904204727535.jpeg");
-        SearchRootResultVO result = search(bytes,"group_number1");
+        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/face_dev/face_test/003.jpeg");
+        SearchRootResultVO result = search(bytes,"face_test");
         System.out.println(result);
     }
 }

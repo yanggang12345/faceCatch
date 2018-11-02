@@ -1,5 +1,6 @@
 package com.nala.faceCatch.util.netty.heart;
 
+import com.nala.faceCatch.service.face.FaceDetection;
 import com.nala.faceCatch.util.FileUtil;
 import com.nala.faceCatch.util.ImageUtil;
 import com.nala.faceCatch.util.netty.idle.ClientHandler;
@@ -47,8 +48,10 @@ public class DataHandler extends SimpleChannelInboundHandler<ByteBuf> {
         Date date = new Date();
         FileUtil.byte2image(array, "/Users/lizengqi/Pictures/face_dev/"
                 + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(date) + ".jpeg");
-        //图像识别
+        //图像匹配
         ImageUtil.faceMacth(array);
+        //图像识别
+        FaceDetection.detect(array);
         System.out.println("ClientHandlerRead0>>>>>>>>>>>>");
 
     }
