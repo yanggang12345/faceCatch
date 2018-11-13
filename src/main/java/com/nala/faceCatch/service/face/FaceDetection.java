@@ -6,6 +6,9 @@ package com.nala.faceCatch.service.face;
  * description 人脸检测
  */
 
+import com.google.gson.Gson;
+import com.nala.faceCatch.entity.quality.QualityResultVO;
+import com.nala.faceCatch.entity.quality.QualityRootResultVO;
 import com.nala.faceCatch.util.*;
 import java.util.*;
 
@@ -46,7 +49,9 @@ public class FaceDetection {
 
     public static void main(String[] args) {
         byte[] image = FileUtil.image2byte("/Users/lizengqi/Pictures/face_dev/face_test/003.jpeg");
-//        String result = FaceDetection.faceQuality(image);
+        String result = FaceDetection.faceQuality(image);
+        Gson gson = new Gson();
+        QualityRootResultVO qualityRootResultVO = gson.fromJson(result, QualityRootResultVO.class);
 //        try{
 //            Map map = JsonUtil.json2map(result);
 //            System.out.println(map);
@@ -59,8 +64,8 @@ public class FaceDetection {
 //            System.out.println(e);
 //        }
 
-        String result = detect(image);
-        System.out.println(result);
+//        String result = detect(image);
+        System.out.println(qualityRootResultVO.getResult().getFace_list().get(0).getQuality().getCompleteness());
     }
 
     /**
