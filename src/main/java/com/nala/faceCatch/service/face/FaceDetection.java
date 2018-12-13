@@ -48,24 +48,12 @@ public class FaceDetection {
 
 
     public static void main(String[] args) {
-        byte[] image = FileUtil.image2byte("/Users/lizengqi/Pictures/face_dev/face_test/003.jpeg");
+        byte[] image = FileUtil.image2byte("/Users/lizengqi/Pictures/face_dev/quality/20181121164527600.jpeg");
         String result = FaceDetection.faceQuality(image);
         Gson gson = new Gson();
         QualityRootResultVO qualityRootResultVO = gson.fromJson(result, QualityRootResultVO.class);
-//        try{
-//            Map map = JsonUtil.json2map(result);
-//            System.out.println(map);
-//            Object result2 = map.get(result);
-//            System.out.println("result--->"+result2);
-//
-//
-//
-//        }catch (Exception e){
-//            System.out.println(e);
-//        }
 
-//        String result = detect(image);
-        System.out.println(qualityRootResultVO.getResult().getFace_list().get(0).getQuality().getCompleteness());
+        System.out.println(result);
     }
 
     /**

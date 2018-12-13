@@ -23,6 +23,11 @@ public class QualityFaceListVO {
      */
     private QualityVO quality;
 
+    /**
+     * 人脸角度
+     */
+    private AngleVO angle;
+
 
     public String getFace_token() {
         return face_token;
@@ -46,5 +51,13 @@ public class QualityFaceListVO {
 
     public void setQuality(QualityVO quality) {
         this.quality = quality;
+    }
+
+    public AngleVO getAngle() {
+        return angle;
+    }
+
+    public void setAngle(AngleVO angle) {
+        this.angle = angle;
     }
 }

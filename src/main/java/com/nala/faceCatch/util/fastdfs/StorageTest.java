@@ -28,17 +28,17 @@ public class StorageTest {
 
 
     public static void main(String args[]) throws Exception {
-        for(int i = 0;i<=100;i++){
-            byte[] srcImage = FileUtil.image2byte("/Users/lizengqi/Pictures/image_dev/timg.jpeg");
-            String fileid = fastDFSClient.uploadFile(srcImage,"jpg");
-            System.out.println("call successf the fileid is:"+fileid);
-        }
+//        for(int i = 0;i<=100;i++){
+        byte[] srcImage = FileUtil.image2byte("/Users/lizengqi/Pictures/image_dev/3.jpg");
+        String fileid = fastDFSClient.uploadFile(srcImage,"jpg");
+        System.out.println("call successf the fileid is:"+fileid);
+//        }
 
 
 //        byte[] fileByte = fastDFSClient.download_bytes("group1/M00/00/00/wKgKH1vanT2AQU8KAAAXBYlIjxk016.jpg");
 ////        FileUtil.byte2image(fileByte,"/data/image.jpg");
 //
-        fastDFSClient.download_file("group1/M00/00/00/wKgKH1vanT2AQU8KAAAXBYlIjxk016.jpg","/data/image1.jpg");
+//        fastDFSClient.download_file("group1/M00/00/00/wKgKH1vanT2AQU8KAAAXBYlIjxk016.jpg","/data/image1.jpg");
 
 //        int result = fastDFSClient.delete_file("group1/M00/00/00/wKgKH1vanT2AQU8KAAAXBYlIjxk016.jpg");
 

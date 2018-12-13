@@ -181,7 +181,7 @@ public class FileUtil {
     }
 
 //    public static void main(String[] args) throws Exception{
-//        byte[] fileToByte = getFileToByte("http://img.nala.com.cn/saas/test/face/13e7de42b0cd444a86471d4e974e80c6/15361179553301082.jpeg");
+//        byte[] fileToByte = getFileToByte("http://ar.nala.com.cn:8888/group1/M00/00/06/3Qx_plwGD6CAEb_wAAAqsjcrm-E126.jpg");
 //        System.out.println(fileToByte.toString());
 //        byte2image(fileToByte,"/Users/lizengqi/Pictures/a.jpeg");
 //    }
