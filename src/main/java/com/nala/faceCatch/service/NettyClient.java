@@ -54,9 +54,7 @@ public class NettyClient {
 
     public static void main(String[] args) throws Exception {
         NettyClient client = new NettyClient();
-//        client.connect("www.syhpgkj.com", 8070);
-        client.connect("192.168.10.10", 8102);
-//        Thread.sleep(100000);
+        client.connect("192.168.10.11", 8102);
     }
 }
 

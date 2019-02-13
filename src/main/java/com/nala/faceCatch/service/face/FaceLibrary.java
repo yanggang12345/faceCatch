@@ -31,7 +31,7 @@ public class FaceLibrary {
             map.put("group_id", groupId);
             map.put("user_id", userId);
             map.put("user_info", userInfo);
-            map.put("liveness_control", "NORMAL");
+            map.put("liveness_control", "LOW");
             map.put("image_type", "BASE64");
             map.put("quality_control", "LOW");
 
@@ -243,7 +243,8 @@ public class FaceLibrary {
 
 
     public static void main(String[] args) throws Exception {
-        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/face_dev/face_test/003.jpeg");
+//        byte[] bytes = FileUtil.readFileByBytes("/Users/lizengqi/Pictures/face_dev/face_test/003.jpeg");
+        byte[] bytes = FileUtil.getFileToByte("http://122.225.11.166:8888/group1/M00/00/0B/3Qx_plwTIVOAVrWLAAAYGjtW4FU62.jpeg");
 //        add(bytes,"group_repeat","mayun","alibaba");
 //        getList("lizengqi","group_repeat");
 //        delete("group_repeat","lizengqi","7aebf33fcfa818b40120418bc4aa4368");

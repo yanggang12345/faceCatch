@@ -7,7 +7,6 @@ package com.nala.faceCatch.service.face;
  */
 
 import com.google.gson.Gson;
-import com.nala.faceCatch.entity.quality.QualityResultVO;
 import com.nala.faceCatch.entity.quality.QualityRootResultVO;
 import com.nala.faceCatch.util.*;
 import java.util.*;
@@ -74,7 +73,6 @@ public class FaceDetection {
 
             String accessToken = GetToken.getAuth();
             String result = HttpUtil.post(DETECT_URL_V3, accessToken, "application/json", param);
-//            System.out.println(result);
             return result;
         } catch (Exception e) {
             e.printStackTrace();
